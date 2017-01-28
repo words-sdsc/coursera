@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# get the .sh location
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # install postgres server and mongodb
 sudo yum install -y postgresql-server postgresql-jdbc
 
@@ -46,7 +49,19 @@ gzip -d *.csv.gz
 chmod 644 *.csv
 
 # create and load tables for hands on
-psql -f setup/init-postgres.sql
+psql -f $DIR/setup/init-postgres.sql
+
+#give permissions for the files so the postgres will be able read the csv files
+chmod 755 $DIR/buy-clicks.csv
+chmod 755 $DIR/game-clicks.csv
+chmod 755 $DIR/ad-clicks.csv
+
+#load the data from csv files into postgres
+psql  << EOF
+COPY buyclicks FROM '$DIR/buy-clicks.csv' DELIMITER ',' CSV HEADER;
+COPY gameclicks FROM '$DIR/game-clicks.csv' DELIMITER ',' CSV HEADER;
+COPY adclicks FROM '$DIR/ad-clicks.csv' DELIMITER ',' CSV HEADER;
+EOF
 
 # download and install anaconda for pandas, jupyter
 wget http://repo.continuum.io/archive/Anaconda3-4.0.0-Linux-x86_64.sh

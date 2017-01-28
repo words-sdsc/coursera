@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS buyclicks;
+DROP TABLE IF EXISTS gameclicks;
+DROP TABLE IF EXISTS adclicks;
+
 CREATE TABLE buyclicks (
 	timestamp TIMESTAMP WITHOUT TIME ZONE NOT NULL, 
 	txid INTEGER NOT NULL, 
@@ -32,7 +36,3 @@ CREATE TABLE adclicks (
 delete from buyclicks;
 delete from gameclicks;
 delete from adclicks;
-
-COPY buyclicks FROM '/home/cloudera/Downloads/big-data-3/buy-clicks.csv' DELIMITER ',' CSV HEADER;
-COPY gameclicks FROM '/home/cloudera/Downloads/big-data-3/game-clicks.csv' DELIMITER ',' CSV HEADER;
-COPY adclicks FROM '/home/cloudera/Downloads/big-data-3/ad-clicks.csv' DELIMITER ',' CSV HEADER;
