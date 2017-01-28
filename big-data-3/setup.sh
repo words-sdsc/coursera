@@ -48,6 +48,19 @@ chmod 644 *.csv
 # create and load tables for hands on
 psql -f setup/init-postgres.sql
 
+#give permissions for the files so the postgres will be able read the csv files
+chmod 755 ./buy-clicks.csv
+chmod 755 ./game-clicks.csv
+chmod 755 ./ad-clicks.csv
+
+#load the data from csv files into postgres
+psql  << EOF
+COPY buyclicks FROM '$PWD/buy-clicks.csv' DELIMITER ',' CSV HEADER;
+COPY gameclicks FROM '$PWD/game-clicks.csv' DELIMITER ',' CSV HEADER;
+COPY adclicks FROM '$PWD/ad-clicks.csv' DELIMITER ',' CSV HEADER;
+EOF
+
+
 # download and install anaconda for pandas, jupyter
 wget http://repo.continuum.io/archive/Anaconda3-4.0.0-Linux-x86_64.sh
 bash Anaconda3-4.0.0-Linux-x86_64.sh
