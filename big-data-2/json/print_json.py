@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # usage: python print_json.py
- 
+
 import json
 import sys
 
@@ -17,7 +17,7 @@ whichTweet = raw_input('Which Tweet Number are you interested in ? ')
 whichTweet = int(whichTweet)
 #whichTweet = int(sys.argv[2])
 
-# read the nested path: 3rd argument 
+# read the nested path: 3rd argument
 ipath = raw_input('Enter path (ex: user/id) : ')
 path = ipath.split("/")
 #path = str(sys.argv[3]).split("/")
@@ -33,9 +33,9 @@ try:
                 data.append(json.loads(line))
                 count=count+1
 except Exception:
-    print "Error while reading file: ", filename
-    print "\nCheck if the file complies with JSON format"
-    print "\nUsage: print_json.py jsonfilename"
+    print("Error while reading file: ", filename)
+    print("\nCheck if the file complies with JSON format")
+    print("\nUsage: print_json.py jsonfilename")
     sys.exit()
 
 
@@ -46,7 +46,7 @@ try:
 	while nextStep < len(path):
 		obj = obj[path[nextStep]]
 		nextStep = nextStep + 1
-	print obj
+	print(obj)
 except Exception:
-	print "Check your path	: ", ipath
-	print "Problem at 	: ", path[nextStep]
+	print("Check your path	: ", ipath)
+	print("Problem at 	: ", path[nextStep])

@@ -16,16 +16,16 @@ try:
             if i%2 == 1: #skip every other line since it is empty
                 data.append(json.loads(line))
 except Exception:
-    print "Error while reading file: ", filename
-    print "Check if the file complies with JSON format"
-    print "\nUsage: json_schema.py jsonfilename"
+    print("Error while reading file: " + filename)
+    print("Check if the file complies with JSON format")
+    print("\nUsage: json_schema.py jsonfilename")
     sys.exit()
 
 #inner dfs
 def dfs_inner(x, indent):
     try:
-        for key, value in x.iteritems():
-            print indent + key
+        for key, value in x.items():
+            print(indent + key)
             try:
                 dfs_inner(value, indent+"....")
             except Exception:
@@ -35,6 +35,6 @@ def dfs_inner(x, indent):
 
 #outer dfs
 indent = " "
-for key, value in data[0].iteritems():
-    print key
+for key, value in data[0].items():
+    print(key)
     dfs_inner(value, indent+"....")
